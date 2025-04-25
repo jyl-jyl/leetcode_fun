@@ -168,4 +168,5 @@ This one is more of a simulation question but an regular algorithm question. BUT
   ```
 </details>  
 
-![Spiral Matrix Preview](./preview.gif)
+<img src="https://github.com/user-attachments/assets/f2684115-ee23-4ad7-ba8f-e68dea3b62ec" alt="Spiral Matrix Preview" height="400"/>
+
