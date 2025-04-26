@@ -53,6 +53,30 @@ ListNode* removeElements(ListNode* head, int val) {
     }
 ```
 
+## Follow-up - Use Recursion to reverse a linked list
+Leetcode 206
+
+I found this amazing because I don't have to picture the complete linked list in my head 
+
+I only need to worry about two nodes: `pre` and `cur`, then let the recursion does its job
+
+That also means, no matter which method you wrote down in the end, linked list problem is always easier if you only think about how relavent nodes should interact with each other (the `recursiveness` nature of its structure)
+
+```c++
+ListNode* reverse(ListNode* pre, ListNode* cur)
+{
+	if(!cur) pre;
+	ListNode* tmp = cur->next;
+	cur->next = pre;
+	return (cur, tmp);
+}
+
+ListNode* reverseList(ListNode* head)
+{
+	return reverse(nullptr, head);
+}
+```
+
 ## Linked List C++ 20 Impl with Iterator Support
 Leetcode 707
 At the end of the day, I'm a C++ developer, I need to do this ...
