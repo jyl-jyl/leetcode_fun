@@ -61,7 +61,10 @@ Distance traveled by the fast ptr by the time they meet:
 
 We know that the `distance_fast` is two times of `distance_slow`
 
-So `Segment_1` + `Segment_2` must be able to be counted by integer numbers of cycle, meaning 
+********************************************************************************************************
+**_So `Segment_1` + `Segment_2` must be able to be counted by some numbers of the FULL CYCLE, meaning_**
+********************************************************************************************************
+
 
 `Segment_1` + `Segment_2` = n times of `cycle`
 
