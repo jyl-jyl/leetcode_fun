@@ -9,3 +9,8 @@ Here are a couple of things I'd like to experiment based on one finding: algorit
 Just like an old saying goes： 先把书读厚，再把书读薄。（For non-Chinese speakers, this translates into “First read the book thick, then read the book thin.” I know it doesn't make any sense, sorry)
 I belive the latter part would be a lot more fun if we can get through the hard bitter shell of the former part. This repository is a space for the fun stuff. 
 
+
+References:  
+[代码随想录_GitHub](https://github.com/youngyangyang04/leetcode-master/tree/master)
+[Chatgpt(free tier)](https://chatgpt.com/)
+[DeepSeek R1](https://chat.deepseek.com/)
