@@ -25,7 +25,7 @@ A container adaptor is a wrapper around a container that provides a restricted i
 | `std::queue`           | FIFO (First-In-First-Out) queue     | `std::deque`                  |
 | `std::priority_queue`  | Max-heap priority queue             | `std::vector`                 |
 
-### FILO (back insertion/removel)
+## FILO (back insertion/removel)
 Leetcode 1047 (Can use to create 开心消消乐 game)
 
 Again problem is easy to solve, but there are multiple possible data structures that could be used like stack, string, vector, etc.. These data strcutures have one thing in common:: they all provide FILO
