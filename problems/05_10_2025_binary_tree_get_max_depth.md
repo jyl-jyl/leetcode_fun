@@ -143,6 +143,27 @@ Once you reach a leaf node, you output the current accumulated path and move on.
 You keep a treeSt for nodes and a parallel pathSt for the paths leading to those nodes.
 This eliminates the need for simulating the call stack using nullptr markers.
 
+**When you only need to traverse all nodes and process each node as you traverse, using preorder iterative can also be a simple approach**
+leetcode 222 Count Complete Tree Nodes
+```cpp
+int countNodes(TreeNode* root) {
+    stack<TreeNode*> st;
+    if (!root)
+        return 0;
+    st.push(root);
+    int res = 0;
+    while (!st.empty()) {
+        auto node = st.top();
+        st.pop();
+        res++;
+        if (auto right = node->right)
+            st.push(right);
+        if (auto left = node->left)
+            st.push(left);
+    }
+    return res;
+}
+```
 
 
 
