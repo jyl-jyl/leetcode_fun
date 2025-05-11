@@ -97,6 +97,51 @@ int getDepth(TreeNode* curr)
 }
 ```
 
+## For iterative solutions, we don't have to use marker all the time!
+Leetcode 257 Binary Tree Path
+```cpp
+vector<string> binaryTreePaths(TreeNode* root) {
+    stack<TreeNode*> treeSt;// 保存树的遍历节点
+    stack<string> pathSt;   // 保存遍历路径的节点
+    vector<string> result;  // 保存最终路径集合
+    if (root == NULL) return result;
+    treeSt.push(root);
+    pathSt.push(to_string(root->val));
+    while (!treeSt.empty()) {
+        TreeNode* node = treeSt.top(); treeSt.pop(); // 取出节点 中
+        string path = pathSt.top();pathSt.pop();    // 取出该节点对应的路径
+        if (node->left == NULL && node->right == NULL) { // 遇到叶子节点
+            result.push_back(path);
+        }
+        if (node->right) { // 右
+            treeSt.push(node->right);
+            pathSt.push(path + "->" + to_string(node->right->val));
+        }
+        if (node->left) { // 左
+            treeSt.push(node->left);
+            pathSt.push(path + "->" + to_string(node->left->val));
+        }
+    }
+    return result;
+}
+```
+### The purpose of the nullptr markers
+In iterative postorder or inorder traversals with a single stack, we usually use nullptr markers to simulate the recursive call stack and ensure a node is processed only after its children. That’s especially important when:
+- You need to visit a node after both its left and right children have been processed (e.g., for postorder).
+- You are tracking depth or need to update a result during backtracking.
+
+The solution for binary tree paths, the traversal logic is fundamentally `preorder`, not `postorder`. This is because when we add in a node, we pop it out and process it immediately 
+
+### Key reasons why this works without nullptr
+1. You process the current node immediately:
+Each time you pop a node from the stack, you already know the full path up to that node (kept in pathSt).
+You don’t need to "return to" this node after processing its children (which is why markers are usually used).
+2. You don't care about backtracking:
+You're not calculating anything based on "after visiting left and right."
+Once you reach a leaf node, you output the current accumulated path and move on.
+3. Separate stacks keep state:
+You keep a treeSt for nodes and a parallel pathSt for the paths leading to those nodes.
+This eliminates the need for simulating the call stack using nullptr markers.
 
 
 
