@@ -112,3 +112,97 @@ int findBottomLeftValue(TreeNode* root) {
     return result;
 }
 ```
+
+## Another exmaple of using both recursive and iterative postorder to get the path sum
+Leetcode 113 Path Sum II
+> Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned as a list of the node values, not node references.
+>
+>A root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.
+
+The iterative solution does not need to marker nullptr and follow the pop + `depth--` logic because all current sum and current vector is stored in separate stacks. This approach is similar to using a explicit stack above
+
+Recursive
+```cpp
+void traversal(TreeNode* cur, int count, vector<int>& path, vector<vector<int>>& res) {
+    if (!cur->left && !cur->right && count == 0) {
+        res.push_back(path);
+        return; 
+    }
+    if (!cur->left && !cur->right)
+        return; 
+
+    if (auto left = cur->left) {
+        path.push_back(left->val); 
+        traversal(cur->left, count-left->val, path, res);
+        path.pop_back(); 
+    }
+    if (auto right = cur->right) {
+        path.push_back(right->val); 
+        traversal(cur->right, count-right->val, path, res);
+        path.pop_back(); 
+    }
+    return;
+}
+
+vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+    vector<vector<int>> res{};
+    if (root == NULL)
+        return res;
+    vector<int> path;
+    path.push_back(root->val);
+    traversal(root, targetSum - root->val, path, res);
+    return res;
+}
+```
+
+Iterative postorder
+```cpp
+vector<vector<int>> pathSum(TreeNode* root, int sum) {
+    vector<vector<int>> res;
+    if (!root)
+        return res;
+
+    stack<TreeNode*> st;
+    stack<vector<int>> pathSt;
+    stack<int> sumSt;
+
+    st.push(root);
+    pathSt.push({root->val});
+    sumSt.push(root->val);
+
+    while (!st.empty()) {
+        TreeNode* node = st.top();
+        st.pop();
+        vector<int> path = pathSt.top();
+        pathSt.pop();
+        int currSum = sumSt.top();
+        sumSt.pop();
+
+        // If it's a leaf node and the sum matches, record the path
+        if (!node->left && !node->right && currSum == sum) {
+            res.push_back(path);
+        }
+
+        // Push right child
+        if (node->right) {
+            st.push(node->right);
+            vector<int> newPath = path;
+            newPath.push_back(node->right->val);
+            pathSt.push(newPath);
+            sumSt.push(currSum + node->right->val);
+        }
+
+        // Push left child
+        if (node->left) {
+            st.push(node->left);
+            vector<int> newPath = path;
+            newPath.push_back(node->left->val);
+            pathSt.push(newPath);
+            sumSt.push(currSum + node->left->val);
+        }
+    }
+
+    return res;
+}
+```
+
