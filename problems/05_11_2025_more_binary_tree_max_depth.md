@@ -66,6 +66,32 @@ Iterative Postorder
     return res;
 }
 ```
+We can also get rid of the marker (for nullptr) by using an explicit stack
+```cpp
+int findBottomLeftValue(TreeNode* root)
+{
+    int res = 0;
+    int max_depth = -1;
+    stack<pair<TreeNode* int>> st;
+    st.push({root, 0});
+    while(!st.empty())
+    {
+        auto [node, depth] = st.top();
+        st.pop();
+        if(node)
+        {
+            if(depth > max_depth)
+            {
+                max_depth = depth;
+                res = node->val;
+            {
+            if(auto right = node->right) st.push({right, depth+1});
+            if(auto left = node->left) st.push({left, depth+1});
+        }
+    }
+    return res;
+}
+```
 
 BFS
 ```cpp
