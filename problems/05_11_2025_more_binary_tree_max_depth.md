@@ -72,7 +72,7 @@ int findBottomLeftValue(TreeNode* root)
 {
     int res = 0;
     int max_depth = -1;
-    stack<pair<TreeNode* int>> st;
+    stack<pair<TreeNode*, int>> st;
     st.push({root, 0});
     while(!st.empty())
     {
