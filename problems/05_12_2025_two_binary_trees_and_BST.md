@@ -165,7 +165,7 @@ bool isValidBST(TreeNode* root) {
 ### Iterative Inorder Null Marker (only push left nodes then push right nodes when backtracing)
 This is actually not necessary because the node already has info about its right node, so we don't need to worry about lose track when backtracing.
 
-However, null marker would be necessary for postorder since we will process right node before the mid node and we can't locate the right node with left node. 
+However, null marker would be necessary for postorder since we will process right node before the mid node and we can't locate the mid node with the right node. 
 
 We also don't need a null marker for preorder, since we can process the mid node, add both its childern to stack, and disregard the mid node. 
 
