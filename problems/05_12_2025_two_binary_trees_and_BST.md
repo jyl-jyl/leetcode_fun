@@ -129,3 +129,72 @@ TreeNode* searchBST(TreeNode* root, int val) {
     return result;
 }
 ```
+
+## Inorder Traversal of a BST
+Leetcode 98 Validate Binary Search Tree
+
+### Recursive
+```cpp
+
+```
+
+### Iterative Inorder Classical (push "some right nodes" before backtracing)
+```cpp
+bool isValidBST(TreeNode* root) {
+    stack<TreeNode*> st;
+    TreeNode* cur = root;
+    TreeNode* pre = NULL;
+
+    while (cur != NULL || !st.empty()) {
+        if (cur != NULL) {
+            st.push(cur);
+            cur = cur->left;      // Go left
+        } else {
+            cur = st.top(); st.pop(); // Process node
+            if (pre != NULL && cur->val <= pre->val)
+                return false;
+            pre = cur;
+            cur = cur->right;    // Go right
+        }
+    }
+
+    return true;
+}
+```
+
+### Iterative Inorder Null Marker (only push left nodes then push right nodes when backtracing)
+This is actually not necessary because the node already has info about its right node, so we don't need to worry about lose track when backtracing.
+
+However, null marker would be necessary for postorder since we will process right node before the mid node and we can't locate the right node with left node. 
+
+We also don't need a null marker for preorder, since we can process the mid node, add both its childern to stack, and disregard the mid node. 
+
+Actually, if we process the postorder as an preorder then reverse the result, it doesn't need a null marker either. 
+```cpp
+bool isValidBST(TreeNode* root) {
+    stack<TreeNode*> st;
+    TreeNode* pre = nullptr;
+
+    if (root)
+        st.push(root);
+
+    while (!st.empty()) {
+        auto node = st.top();
+        st.pop();
+
+        if (node) {
+            if (node->right) st.push(node->right);
+            st.push(node);
+            st.push(nullptr);           // Null marker signals when to process the node
+            if (node->left) st.push(node->left);
+        } else {
+            node = st.top(); st.pop(); // Process node
+            if (pre && node->val <= pre->val)
+                return false;
+            pre = node;
+        }
+    }
+
+    return true;
+}
+```
