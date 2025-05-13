@@ -103,3 +103,29 @@ TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
     return t1;
 }
 ```
+
+## Searching in a Binary Search Tree 
+The key difference is that when searching for an element in a BST, we do not need to TRAVERSE all nodes, we only need to selecting branches to go into. 
+
+### Iterative
+```cpp
+TreeNode* searchBST(TreeNode* root, int val) {
+    while (root != NULL) {
+        if (root->val > val) root = root->left;
+        else if (root->val < val) root = root->right;
+        else return root;
+    }
+    return NULL;
+}
+```
+
+### Recursive
+```cpp
+TreeNode* searchBST(TreeNode* root, int val) {
+    if (root == NULL || root->val == val) return root;
+    TreeNode* result = NULL;
+    if (root->val > val) result = searchBST(root->left, val);
+    if (root->val < val) result = searchBST(root->right, val);
+    return result;
+}
+```
