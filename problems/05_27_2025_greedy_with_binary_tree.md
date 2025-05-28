@@ -1,4 +1,4 @@
-## An very intersting problem of Greedy + Binary Tree
+## A very intersting problem of Greedy + Binary Tree
 Leetcode 968. Binary Tree Cameras
 
 > You are given the root of a binary tree. We install cameras on the tree nodes where each
